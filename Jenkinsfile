@@ -192,10 +192,11 @@ podTemplate(label: label, serviceAccount: serviceaccount, containers: [
                sh '''
 			committerEmail='''+ committerEmail +'''
 			BUILDUSER=`echo $committerEmail | awk -F@ '{print $1}'`
+            kubectl get pods -n {BUILDUSER}
+            kubectl get svc grafana-service -n {BUILDUSER} 
+            kubectl rollout status deployment/grafana-deployment -n {BUILDUSER}
             '''
-               sh ("kubectl get pods -n {BUILDUSER}")
-              sh( "kubectl get svc grafana-service -n {BUILDUSER}")  
-             sh ("kubectl rollout status deployment/grafana-deployment -n {BUILDUSER}")
+               
              sleep 60 // seconds 
              LB = sh (returnStdout: true, script: '''kubectl get svc grafana-service -n {BUILDUSER} -o jsonpath="{.status.loadBalancer.ingress[*]['ip', 'hostname']}" ''')
              echo "LB: ${LB}"
