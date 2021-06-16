@@ -201,7 +201,8 @@ podTemplate(label: label, serviceAccount: serviceaccount, containers: [
             
              LB = sh (returnStdout: true, script: '''committerEmail='''+ committerEmail +''' ; BUILDUSER=`echo $committerEmail | awk -F@ '{print $1}'`;kubectl get svc grafana-service -n ${BUILDUSER} -o jsonpath="{.status.loadBalancer.ingress[*]['ip', 'hostname']}" ''')
              echo "LB: ${LB}"
-             def loadbalancer = "http://"+LB
+             def loadbalancer = "http://"+LB+":8081"
+
              echo "loadbalancer: ${loadbalancer}"
 			 echo "application_url: ${loadbalancer}"
 				
