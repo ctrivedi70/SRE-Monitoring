@@ -1,0 +1,19 @@
+generalwhitelist:
+  CVE-2016-2090: libbsd
+  CVE-2017-16914: linux
+  CVE-2017-9984: linux
+  CVE-2017-10663: Redhat
+  CVE-2018-6485: Redhat
+  CVE-2017-8287: Redhat
+  CVE-2016-9843: Redhat
+  CVE-2016-9841: Redhat
+  CVE-2017-8105: Redhat
+images:
+  centos:
+    RHSA-2017: 2479
+    RHSA-2018: 0805
+  alpine:
+    CVE-2017-9671: alpine
+  fluent/fluent-bit:
+    CVE-2017-14062: Integer
+    CVE-2018-6485: Integer

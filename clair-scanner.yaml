@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{parm}}
+  labels:
+    app: {{parm}}
+spec:
+  ports:
+  - port: 9279
+    protocol: TCP
+  selector:
+    'jenkins/{{parm}}': 'true'
