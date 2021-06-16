@@ -162,7 +162,7 @@ podTemplate(label: label, serviceAccount: serviceaccount, containers: [
                    sh '''
 			committerEmail='''+ committerEmail +'''
 			BUILDUSER=`echo $committerEmail | awk -F@ '{print $1}'`
-            kubectl get deployment/grafana-deployment
+            kubectl get deployment/grafana-deployment ${BUILDUSER}
             '''   
                }
                catch (Exception e){
@@ -177,7 +177,7 @@ podTemplate(label: label, serviceAccount: serviceaccount, containers: [
                    sh '''
 			committerEmail='''+ committerEmail +'''
 			BUILDUSER=`echo $committerEmail | awk -F@ '{print $1}'`
-            kubectl get service/grafana-service
+            kubectl get service/grafana-service ${BUILDUSER}
             '''
                     
                }
