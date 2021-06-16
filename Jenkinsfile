@@ -159,19 +159,40 @@ podTemplate(label: label, serviceAccount: serviceaccount, containers: [
 			container('kubectl') {
 			   sh("kubectl apply -f namespace.yaml")
 			   try{
-                   sh("kubectl get deployment/grafana-deployment -n {BUILDUSER}")
+                   sh '''
+			committerEmail='''+ committerEmail +'''
+			BUILDUSER=`echo $committerEmail | awk -F@ '{print $1}'`
+            kubectl get deployment/grafana-deployment -n {BUILDUSER}
+            '''   
                }
                catch (Exception e){
-                    sh("kubectl apply -f grafanadeploy.yaml -n {BUILDUSER}")
+                    sh '''
+			committerEmail='''+ committerEmail +'''
+			BUILDUSER=`echo $committerEmail | awk -F@ '{print $1}'`
+                    kubectl apply -f grafanadeploy.yaml -n {BUILDUSER}
+                    '''
                     sleep 10
                }
                try{
-                    sh("kubectl get service/grafana-service -n {BUILDUSER}")
+                   sh '''
+			committerEmail='''+ committerEmail +'''
+			BUILDUSER=`echo $committerEmail | awk -F@ '{print $1}'`
+            kubectl get service/grafana-service -n {BUILDUSER}
+            '''
+                    
                }
                catch (Exception e){
-                    sh("kubectl apply -f grafanaservice.yaml -n {BUILDUSER}")
+                    sh '''
+			committerEmail='''+ committerEmail +'''
+			BUILDUSER=`echo $committerEmail | awk -F@ '{print $1}'`
+                    "kubectl apply -f grafanaservice.yaml -n {BUILDUSER}
+                    '''
                     sleep 30
                }
+               sh '''
+			committerEmail='''+ committerEmail +'''
+			BUILDUSER=`echo $committerEmail | awk -F@ '{print $1}'`
+            '''
                sh ("kubectl get pods -n {BUILDUSER}")
               sh( "kubectl get svc grafana-service -n {BUILDUSER}")  
              sh ("kubectl rollout status deployment/grafana-deployment -n {BUILDUSER}")
