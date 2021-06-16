@@ -198,16 +198,13 @@ podTemplate(label: label, serviceAccount: serviceaccount, containers: [
             '''
                
              sleep 60 // seconds 
-             sh '''
-			committerEmail='''+ committerEmail +'''
-			BUILDUSER=`echo $committerEmail | awk -F@ '{print $1}'`
             
-             LB = sh (returnStdout: true, script: '''kubectl get svc grafana-service -n ${BUILDUSER} -o jsonpath="{.status.loadBalancer.ingress[*]['ip', 'hostname']}" ''')
+             LB = sh (returnStdout: true, script: '''committerEmail='''+ committerEmail +''' ; BUILDUSER=`echo $committerEmail | awk -F@ '{print $1}'`;kubectl get svc grafana-service -n ${BUILDUSER} -o jsonpath="{.status.loadBalancer.ingress[*]['ip', 'hostname']}" ''')
              echo "LB: ${LB}"
              def loadbalancer = "http://"+LB
              echo "loadbalancer: ${loadbalancer}"
 			 echo "application_url: ${loadbalancer}"
-				'''
+				
 			}
         }
         }
