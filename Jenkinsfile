@@ -18,7 +18,7 @@ podTemplate(label: label, serviceAccount: serviceaccount, containers: [
 		imagePullSecrets: ['gcrcred']
 ) {
     node(label) {  
-        def GIT_URL= 'http://gitlab.ethan.svc.cluster.local:8084/gitlab/devopsuser1/module7_monitoring.git'
+        def GIT_URL= 'http://gitlab.ethan.svc.cluster.local:8084/gitlab/root/module7_monitoring.git'
 		def GIT_CREDENTIAL_ID ='gitlab'
 		def GIT_BRANCH='master'
         		
