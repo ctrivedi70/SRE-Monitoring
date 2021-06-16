@@ -162,14 +162,14 @@ podTemplate(label: label, serviceAccount: serviceaccount, containers: [
                    sh '''
 			committerEmail='''+ committerEmail +'''
 			BUILDUSER=`echo $committerEmail | awk -F@ '{print $1}'`
-            kubectl get deployment/grafana-deployment -n {BUILDUSER}
+            kubectl get deployment/grafana-deployment
             '''   
                }
                catch (Exception e){
                     sh '''
 			committerEmail='''+ committerEmail +'''
 			BUILDUSER=`echo $committerEmail | awk -F@ '{print $1}'`
-                    kubectl apply -f grafanadeploy.yaml -n {BUILDUSER}
+                    kubectl apply -f grafanadeploy.yaml
                     '''
                     sleep 10
                }
@@ -177,7 +177,7 @@ podTemplate(label: label, serviceAccount: serviceaccount, containers: [
                    sh '''
 			committerEmail='''+ committerEmail +'''
 			BUILDUSER=`echo $committerEmail | awk -F@ '{print $1}'`
-            kubectl get service/grafana-service -n {BUILDUSER}
+            kubectl get service/grafana-service
             '''
                     
                }
@@ -185,7 +185,7 @@ podTemplate(label: label, serviceAccount: serviceaccount, containers: [
                     sh '''
 			committerEmail='''+ committerEmail +'''
 			BUILDUSER=`echo $committerEmail | awk -F@ '{print $1}'`
-                    "kubectl apply -f grafanaservice.yaml -n {BUILDUSER}
+                    kubectl apply -f grafanaservice.yaml
                     '''
                     sleep 30
                }
