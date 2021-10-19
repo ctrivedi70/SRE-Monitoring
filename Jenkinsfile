@@ -220,6 +220,6 @@ podTemplate(label: label, serviceAccount: serviceaccount, containers: [
         echo "Finished: ${currentBuild.result}"
         
 		}               
-     logstashSend failBuild: false, maxLines: -1
+     //logstashSend failBuild: false, maxLines: -1
      }
      }
