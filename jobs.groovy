@@ -40,8 +40,6 @@ pipelineJob(concatVar)
 					configure = null } 
 			} 
 		} 
-	triggers {
-	scm('H/1 * * * *') } 
 	} 
 }
 
