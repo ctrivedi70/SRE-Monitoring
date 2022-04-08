@@ -126,8 +126,8 @@ podTemplate(label: label, serviceAccount: serviceaccount, containers: [
 			v2=`echo $v1 | sed 's/v//g'`
 			versionserver=`echo $v2 | cut -f1,2 -d'.'`
 			echo kubernetes version is ${versionserver}
-            kubectl run --rm -i kube-bench-master-frontend-${BUILD_ID} --image=localhost:32121/root/docker_registry/aiindevops.azurecr.io/kube-bench:0.6 --restart=Never --overrides="{ \\"apiVersion\\": \\"v1\\", \\"spec\\": { \\"imagePullSecrets\\": [ { \\"name\\": \\"gcrcred\\" } ], \\"hostPID\\": true, \\"nodeSelector\\": { \\"kubernetes.io/role\\": \\"master\\" }, \\"tolerations\\": [ { \\"key\\": \\"node-role.kubernetes.io/master\\", \\"operator\\": \\"Exists\\", \\"effect\\": \\"NoSchedule\\" } ] } }" -- master --version ${versionserver}
-            kubectl run --rm -i kube-bench-node-frontend-${BUILD_ID} --image=localhost:32121/root/docker_registry/aiindevops.azurecr.io/kube-bench:0.6 --restart=Never --overrides="{ \\"apiVersion\\": \\"v1\\", \\"spec\\": { \\"imagePullSecrets\\": [ { \\"name\\": \\"gcrcred\\" } ], \\"hostPID\\": true } }" -- node --version ${versionserver}
+            kubectl run --rm -i kube-bench-master-frontend-${BUILD_ID} --image=aquasec/kube-bench:0.6.0 --restart=Never --overrides="{ \\"apiVersion\\": \\"v1\\", \\"spec\\": { \\"imagePullSecrets\\": [ { \\"name\\": \\"gcrcred\\" } ], \\"hostPID\\": true, \\"nodeSelector\\": { \\"kubernetes.io/role\\": \\"master\\" }, \\"tolerations\\": [ { \\"key\\": \\"node-role.kubernetes.io/master\\", \\"operator\\": \\"Exists\\", \\"effect\\": \\"NoSchedule\\" } ] } }" -- master --version ${versionserver}
+            kubectl run --rm -i kube-bench-node-frontend-${BUILD_ID} --image=aquasec/kube-bench:0.6.0 --restart=Never --overrides="{ \\"apiVersion\\": \\"v1\\", \\"spec\\": { \\"imagePullSecrets\\": [ { \\"name\\": \\"gcrcred\\" } ], \\"hostPID\\": true } }" -- node --version ${versionserver}
             '''
             }      
          
