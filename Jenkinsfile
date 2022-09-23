@@ -47,6 +47,7 @@ podTemplate(label: label, serviceAccount: serviceaccount, containers: [
         def  JOBNAME = "${JOB_NAME.split('/')[1]}"
 				
 		def K8S_DEPLOYMENT_NAME = 'pet-clinic'
+         echo 'Pipeline Started'
                         
      try {
 		
